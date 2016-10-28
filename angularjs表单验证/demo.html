@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="demo.css">
+</head>
+<body ng-app="myApp" ng-controller="SignUpController">
+    <form name="signUpForm" ng-submit="submitForm()">
+        <div class="form-group has-feedback" ng-class="{ 'has-success':signUpForm.username.$valid,
+                                                        'has-error':signUpForm.username.$invalid && signUpForm.username.$touched}">
+            <label>用户名：</label>
+            <input type="text"
+                   class="form-control"
+                   name="username"
+                   ng-model="userdata.username"
+                   ng-pattern="/^[A-Za-z_0-9]{4,16}$/"
+                   required>
+            <p class="text-danger" ng-if="signUpForm.username.$error.required &&
+                                        signUpForm.username.$touched">用户名不能为空</p>
+            <!--<p class="error" ng-if="(signUpForm.username.$error.minlength ||-->
+            <!--signUpForm.username.$error.maxlength) &&-->
+            <!--signUpForm.username.$touched">长度是4~16位</p>-->
+            <p class="text-danger" ng-if="signUpForm.username.$error.pattern &&
+                                        signUpForm.username.$touched">由字母，数字或下划线组成，长度在4位到16位</p>
+            <span ng-if="signUpForm.username.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-if="signUpForm.username.$invalid && signUpForm.username.$touched" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+
+        <div class="form-group has-feedback" ng-class="{ 'has-success':signUpForm.password.$valid,
+                                                        'has-error':signUpForm.password.$invalid && signUpForm.password.$touched}">
+            <label>密码：</label>
+            <input type="password"
+                   class="form-control"
+                   name="password"
+                   ng-model="userdata.password"
+                   ng-pattern="/^[A-Za-z_0-9]{4,16}$/"
+                   required>
+            <p class="text-danger" ng-if="signUpForm.password.$error.required &&
+                                        signUpForm.password.$touched">密码不能为空</p>
+            <p class="text-danger" ng-if="signUpForm.password.$error.pattern &&
+                                        signUpForm.password.$touched">由字母，数字或下划线组成，长度在4位到16位</p>
+            <span ng-if="signUpForm.password.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-if="signUpForm.password.$invalid && signUpForm.password.$touched" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+
+        <div class="form-group has-feedback" ng-class="{ 'has-success':signUpForm.password2.$valid,
+                                                        'has-error':signUpForm.password2.$invalid && signUpForm.password2.$touched}">
+            <label>确认密码：</label>
+            <input type="password"
+                   class="form-control"
+                   name="password2"
+                   ng-model="userdata.password2"
+                   compare="userdata.password"
+                   required>
+            <p class="text-danger" ng-if="signUpForm.password2.$error.compare &&
+                                        signUpForm.password2.$touched">两次输入不一致</p>
+            <p class="text-danger" ng-if="signUpForm.password2.$error.required &&
+                                        signUpForm.password2.$touched">确认密码不能为空</p>
+            <span ng-if="signUpForm.password2.$valid" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            <span ng-if="signUpForm.password2.$invalid && signUpForm.password2.$touched" class="glyphicon glyphicon-remove form-control-feedback"></span>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" ng-disabled="signUpForm.$invalid">提交</button>
+        </div>
+    </form>
+</body>
+
+<script src="lib/angular.min.js"></script>
+<script src="demo.js"></script>
+</html>
