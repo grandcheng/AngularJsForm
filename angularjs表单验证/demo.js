@@ -1,6 +1,11 @@
 angular.module("myApp",[])
     .controller("SignUpController",function ($scope) {
-        $scope.userdata = {}
+        $scope.master = {username:"wuyucheng", password:"wuyucheng", password2:"wuyucheng"}
+        // $scope.userdata = {}
+        $scope.reset = function () {
+            $scope.userdata = angular.copy($scope.master);
+        }
+        $scope.reset();
         $scope.submitForm = function () {
             console.log($scope.userdata);
         }
