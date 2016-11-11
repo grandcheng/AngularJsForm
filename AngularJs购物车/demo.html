@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/demo.css">
+</head>
+<body ng-app="myApp">
+    <div class="container" ng-controller="cartController">
+        <table class="table" ng-show="cart.length">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>名字</th>
+                    <th>数量</th>
+                    <th>单价</th>
+                    <th>总价</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat = "item in cart">
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" ng-click="reduce(item.id)">-</button>
+                        <input type="text" value="{{item.quantity}}" ng-model="item.quantity" ng-keydown="clearNoNum(item.id)">
+                        <button type="button" class="btn btn-primary" ng-click="add(item.id)">+</button>
+                    </td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.price * item.quantity}}</td>
+                    <td>
+                        <button type="button" ng-click="remove(item.id)" class="btn btn-danger">移除</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>总价</td>
+                    <td>{{totalPrice()}}</td>
+                    <td>总数</td>
+                    <td>{{totalQuantity()}}</td>
+                    <td colspan="2">
+                        <button type="button" ng-click="cart = {}" class="btn btn-danger">清空</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p ng-show="!cart.length">购物车为空</p>
+    </div>
+</body>
+
+<script src="js/angular.min.js"></script>
+<script src="js/demo.js"></script>
+</html>

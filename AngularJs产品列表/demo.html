@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body  ng-app="product">
+    <div class="container" ng-controller="productController">
+        <input type="text" class="form-control" placeholder="搜索" ng-model="search">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th ng-class="{dropup:order === ''}" ng-click="changeOrder('id')">
+                        id
+                        <span ng-class="{caret:orderType === 'id'}"></span>
+                    </th>
+                    <th ng-class="{dropup:order === ''}" ng-click="changeOrder('name')">
+                        名称
+                        <span ng-class="{caret:orderType === 'name'}"></span>
+                    </th>
+                    <th ng-class="{dropup:order === ''}" ng-click="changeOrder('price')">
+                        价格
+                        <span ng-class="{caret:orderType === 'price'}"></span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat = "product in productData | filter:search | orderBy:order + orderType">
+                    <td>
+                        {{product.id}}
+                    </td>
+                    <td>
+                        {{product.name}}
+                    </td>
+                    <td>
+                        {{product.price | currency : "￥"}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="js/angular.min.js"></script>
+    <script src="js/demo.js"></script>
+</body>
+</html>
